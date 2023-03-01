@@ -1,31 +1,28 @@
 pipeline {
-    agent any 
-    stages{
-        stage('BUILD') {
-            steps{
-                 sh '''
-                    sleep 5
-                    echo "This is a BUILD stage"
-                '''
-            }
+    agent none
+    stage ('build') {
+        agent {label ('slave1') }
+        steps {
+            sh '''
+            sleep 5
+            echo "this is build stage"
+            '''
         }
-
-        stage('TEST') {
-            steps{
-                sh '''
-                    sleep 6
-                    echo "This is a TEST stage"
-                '''
-            }
+    } 
+    stage  ('test') {
+        agent { label ('slave2')}
+        steps {
+            sh '''
+            sleep 5
+            echo "this is test stage "
         }
-
-        stage('DEPLOY') {
-            steps{
-                sh '''
-                    sleep 5
-                    echo "This is a DEPLOY stage"
-                '''
-            }
+    }
+    stage ('deploy') {
+        agent {label 'master'}
+        steps{
+            sh '''
+            sleep 6
+            echo "this is deploy stage"
         }
     }
 }
