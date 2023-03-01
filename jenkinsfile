@@ -23,8 +23,7 @@ pipeline {
             steps{
                 sh '''
                     sleep 5
-                    echo "This is a DEPLOY stage"
-                    exit 1
+                    echo "This is a DEPLOY stage
                 '''
             }
         }
