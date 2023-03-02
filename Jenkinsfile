@@ -8,6 +8,7 @@ pipeline {
                         branch 'main'
                     }
                     steps{
+                        
                         sh "echo STAGE-2 executes if branch is main"
                     }
                 }
