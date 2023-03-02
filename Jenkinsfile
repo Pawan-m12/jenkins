@@ -1,4 +1,4 @@
-piepline {
+pipeline {
     agent any 
     stages {
         stage('parallel') {
@@ -8,7 +8,6 @@ piepline {
                         branch 'main'
                     }
                     steps{
-                        catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE')
                         sh "echo STAGE-2 executes if branch is main"
                     }
                 }
