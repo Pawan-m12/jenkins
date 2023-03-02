@@ -1,24 +1,32 @@
+def boolean stage_result = false
 pipeline {
     agent any 
-    parameters {
-        choice(name: 'STAGE_NAME', choices: ['STAGE-1', 'STAGE-2'], description: 'Enter stage name to execute ?')
-    }
     stages {
-        stage('STAGE-1') {
-            when { 
-                expression{ params.STAGE_NAME == "STAGE-1" }
-            }    
+        stage('A') {
             steps{
-                print "DEBUG: parameter STAGE_NAME = ${params.STAGE_NAME}"
-            }
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    print "Stage A"
+                    sh "exit 1"
+                    script { stage_result = true }
+                }
+            }    
         }
 
-        stage('STAGE-2'){
+        stage('B'){
             when { 
-                expression{ params.STAGE_NAME == "STAGE-2" }
+                expression{ stage_result == true }
             }    
             steps{
-                print "DEBUG: parameter STAGE_NAME = ${params.STAGE_NAME}"
+                print "EXECUTING: Stage B STAGE_A_RESULT: ${stage_result}"
+            }    
+        }
+
+        stage('C'){
+            when { 
+                expression{ stage_result == false }
+            }    
+            steps{
+                print "EXECUTING: Stage C STAGE_A_RESULT: ${stage_result}"
             }    
         }
     }
