@@ -1,4 +1,4 @@
-def boolean stage_result = false
+def boolean stage_result = true
 pipeline {
     agent any 
     stages {
