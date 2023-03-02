@@ -15,7 +15,7 @@ pipeline {
                     sh '''
                         sleep 5
                         echo "This is a BUILD stage $BRANCH_NAME"
-                        exit 1
+                      
                     '''
                 }
             }
@@ -29,7 +29,7 @@ pipeline {
                         sh '''
                             sleep 6
                             echo "This is a TEST on LINUX"
-                            exit 1
+                            
                         '''
                     }
                 }
