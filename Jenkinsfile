@@ -49,7 +49,7 @@ pipeline {
                             sh '''
                                 sleep 6
                                 echo "This is a TEST on WINDOWS"
-                                exit 1
+                        
                             '''
                         }    
                     }
